@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Paths;
 
 
 public class Generator {
@@ -32,9 +33,16 @@ public class Generator {
         generator.execute();
     }
 
-    private static GlobalConfig getGlobalConfig(){
+    static GlobalConfig getGlobalConfig(){
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setOutputDir("D://generator/src/main/java");
+        String outputDir = System.getenv("GENERATOR_OUTPUT_DIR");
+        if (outputDir == null || "".equals(outputDir)) {
+            outputDir = System.getProperty("generator.output.dir");
+        }
+        if (outputDir == null || "".equals(outputDir)) {
+            outputDir = Paths.get(System.getProperty("java.io.tmpdir"), "generator").toString();
+        }
+        globalConfig.setOutputDir(outputDir);
         globalConfig.setAuthor("zhangzhiwei");
         globalConfig.setOpen(false);
         globalConfig.setKotlin(false);
