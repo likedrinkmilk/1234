@@ -927,7 +927,7 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUserMapper, Admin
         nacosMap.put("store.mode", "db");
         nacosMap.put("store.db.datasource", "druid");
         nacosMap.put("store.db.dbType", "mysql");
-        nacosMap.put("store.db.driverClassName", "com.mysql.jdbc.Driver");
+        nacosMap.put("store.db.driverClassName", "com.mysql.cj.jdbc.Driver");
         String host = dataSourceProperties.getUrl().replace("jdbc:mysql://", "").split(":")[0];
         nacosMap.put("store.db.url", "jdbc:mysql://" + host + ":3306/seata?useUnicode=true");
         nacosMap.put("store.db.user", dataSourceProperties.getUsername());
